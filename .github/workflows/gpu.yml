@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026, Dongfang Zhao <dzhao@cs.washington.edu>
+# SPDX-License-Identifier: Apache-2.0
+#
+name: GPU tests
+
+# Exactness tests against exhaustive fp64 search; they need a CUDA GPU, so they run on a self-hosted runner with the
+# labels below. Until such a runner is registered, the workflow only runs when started by hand.
+on:
+  workflow_dispatch:
+
+jobs:
+  exactness:
+    runs-on: [self-hosted, linux, gpu]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install -e ".[test]"
+      - run: python -m pytest -m gpu -q
+      - run: python bench/bench_bigann.py 10 123 device
+        if: ${{ hashFiles('/data/bigann/base.1B.u8bin') != '' }}

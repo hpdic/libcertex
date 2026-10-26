@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026, Dongfang Zhao <dzhao@cs.washington.edu>
+# SPDX-License-Identifier: Apache-2.0
+#
+[build-system]
+requires = [
+    "scikit-build-core>=0.11",
+    "nanobind>=2.4",
+    "libcuvs-cu12==26.10.*",
+    "nvidia-nvjitlink-cu12>=12.9",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "certex"
+version = "0.1.0"
+description = "Exact k-nearest-neighbor search on NVIDIA GPUs by certified exclusion"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{name = "Dongfang Zhao", email = "dzhao@cs.washington.edu"}]
+license-files = ["LICENSE", "NOTICE"]
+dependencies = ["torch>=2.4", "numpy>=1.24", "libcuvs-cu12==26.10.*", "nvidia-nvjitlink-cu12>=12.9"]
+
+keywords = ["nearest neighbor search", "vector search", "exact search", "GPU", "tensor cores", "RAG"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Database :: Database Engines/Servers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Homepage = "https://github.com/hpdic/libcertex"
+"Zarc paper" = "https://doi.org/10.5281/zenodo.23674583"
+"CertEx paper" = "https://arxiv.org/abs/2610.21325"
+Changelog = "https://github.com/hpdic/libcertex/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+docs = ["mkdocs==1.6.1", "mkdocs-material==9.5.39", "mkdocstrings==0.26.1", "mkdocstrings-python==1.11.1", "pymdown-extensions==10.11.2"]
+dev = ["pytest>=8", "ruff==0.6.9", "pre-commit>=3.8", "mkdocs==1.6.1", "mkdocs-material==9.5.39", "mkdocstrings==0.26.1",
+       "mkdocstrings-python==1.11.1", "pymdown-extensions==10.11.2"]
+
+[tool.scikit-build]
+cmake.source-dir = "python"
+cmake.version = ">=4.0"
+cmake.build-type = "Release"
+ninja.make-fallback = false
+wheel.packages = ["certex"]
+wheel.exclude = ["certex/__pycache__"]
+sdist.exclude = ["bench", "docs", ".github"]
+
+[tool.scikit-build.cmake.define]
+CMAKE_CUDA_ARCHITECTURES = "80;90a"
+CERTEX_CUTLASS_DIR = {env = "CERTEX_CUTLASS_DIR", default = ""}
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E702", "E741"]
+
+[tool.ruff.lint.per-file-ignores]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "gpu: needs a CUDA GPU (compute capability 8.0 or newer)",
+    "slow: takes more than a minute",
+]

@@ -1,0 +1,14 @@
+certex (libcertex)
+Copyright 2026 Dongfang Zhao <dzhao@cs.washington.edu>
+
+This product includes software developed by Dongfang Zhao <dzhao@cs.washington.edu>.
+
+cpp/src/core/nvtx.hpp is copied unchanged from cuVS (https://github.com/rapidsai/cuvs), Copyright NVIDIA
+CORPORATION, licensed under the Apache License 2.0, so that the CertEx sources compile unchanged inside cuVS.
+
+The CUDA kernels are compiled with the CUTLASS and CuTe headers (https://github.com/NVIDIA/cutlass), Copyright
+NVIDIA CORPORATION & AFFILIATES, licensed under the BSD 3-Clause License. The headers are fetched at build time and
+are not part of this repository; binary distributions of certex contain code instantiated from them.
+
+The C API uses the DLPack header (https://github.com/dmlc/dlpack), licensed under the Apache License 2.0, fetched at
+build time when it is not installed.

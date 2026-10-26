@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026, Dongfang Zhao <dzhao@cs.washington.edu>
+# SPDX-License-Identifier: Apache-2.0
+#
+# Release wheels: a manylinux_2_28 wheel of the Python package (the CUDA library and the nanobind extension), built
+# in the PyPA manylinux image with the CUDA 12.9 compiler and repaired by auditwheel. The CUDA, cuVS, RAFT, and RMM
+# libraries stay external: they come from the NVIDIA and RAPIDS wheels that the package depends on.
+# Manual only (workflow_dispatch); the build needs no GPU.
+name: wheel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  wheel:
+    runs-on: ubuntu-latest
+    container: quay.io/pypa/manylinux_2_28_x86_64
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: CUDA 12.9 compiler and libraries
+        run: |
+          dnf install -y dnf-plugins-core
+          dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo
+          dnf install -y cuda-nvcc-12-9 cuda-cudart-devel-12-9 cuda-cccl-12-9 cuda-nvtx-12-9 cuda-nvrtc-devel-12-9 \
+                         libcublas-devel-12-9 libcusolver-devel-12-9 libcusparse-devel-12-9 libcurand-devel-12-9 \
+                         libnvjitlink-devel-12-9 libcufile-devel-12-9
+          echo "/usr/local/cuda-12.9/bin" >> "$GITHUB_PATH"
+          echo "CUDA_HOME=/usr/local/cuda-12.9" >> "$GITHUB_ENV"
+      - name: Build
+        run: |
+          PY=/opt/python/cp$(echo "${{ matrix.python }}" | tr -d .)-cp$(echo "${{ matrix.python }}" | tr -d .)/bin/python
+          $PY -m pip install -U pip build
+          # sm_80 code also runs on 8.6 and 8.9 (RTX 30/40, A10, L4, L40S); 100f and 120a cover Blackwell, and PTX for
+          # 12.0 lets newer GPUs compile it at load time
+          CMAKE_BUILD_PARALLEL_LEVEL=4 $PY -m pip wheel . -w dist --no-deps -v \
+            -C cmake.define.CMAKE_CUDA_ARCHITECTURES="80-real;90a-real;100f-real;120a-real;120-virtual"
+      - name: Repair (manylinux_2_28)
+        run: |
+          auditwheel repair dist/certex-*.whl -w wheelhouse --plat manylinux_2_28_x86_64 \
+            --exclude 'libcuvs*.so*' --exclude 'libraft*.so*' --exclude 'librmm*.so*' --exclude 'librapids_logger*.so*' \
+            --exclude 'libkvikio*.so*' --exclude 'libcublas*.so*' --exclude 'libcusolver*.so*' \
+            --exclude 'libcusparse*.so*' --exclude 'libcurand*.so*' --exclude 'libnvJitLink*.so*' \
+            --exclude 'libcudart*.so*' --exclude 'libnvrtc*.so*' --exclude 'libcuda.so*'
+          auditwheel show wheelhouse/certex-*.whl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: certex-wheel-py${{ matrix.python }}
+          path: wheelhouse/*.whl

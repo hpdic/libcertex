@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026, Dongfang Zhao <dzhao@cs.washington.edu>
+# SPDX-License-Identifier: Apache-2.0
+#
+# Doxygen configuration of the C++ and C API reference (cuvs::neighbors::certex):
+#   cd cpp && doxygen Doxyfile      # writes build/doxygen/html/index.html
+PROJECT_NAME           = "CertEx for cuVS"
+PROJECT_BRIEF          = "Exact k-nearest-neighbor search on NVIDIA GPUs by certified exclusion"
+OUTPUT_DIRECTORY       = build/doxygen
+INPUT                  = include/cuvs/neighbors ../c/include/cuvs/neighbors
+FILE_PATTERNS          = certex*.hpp certex*.h
+RECURSIVE              = NO
+EXTRACT_ALL            = NO
+EXTRACT_STATIC         = NO
+HIDE_UNDOC_MEMBERS     = NO
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_XML           = NO
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_NO_PARAMDOC       = NO
+WARN_LOGFILE           = build/doxygen/warnings.log
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+PREDEFINED             = CUVS_EXPORT= __device__= __host__=
+JAVADOC_AUTOBRIEF      = YES
+SORT_MEMBER_DOCS       = NO
+
+HAVE_DOT               = NO
+CLASS_GRAPH            = NO

@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026, Dongfang Zhao <dzhao@cs.washington.edu>
+# SPDX-License-Identifier: Apache-2.0
+#
+site_name: certex
+site_description: Exact k-nearest-neighbor search on NVIDIA GPUs by certified exclusion
+repo_url: https://github.com/hpdic/libcertex
+copyright: Copyright 2026 Dongfang Zhao
+theme:
+  name: material
+  features: [navigation.sections]
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options: {show_source: false, docstring_style: google, members_order: source}
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.arithmatex: {generic: true}
+nav:
+  - Home: index.md
+  - Getting started:
+      - Installation: installation.md
+      - Quickstart: quickstart.md
+  - User guide:
+      - Metrics and storage: guide/metrics-and-storage.md
+      - Insertions and removals: guide/updates.md
+      - Filtered search: guide/filtered.md
+      - Lists and local projections: guide/lists.md
+      - Several GPUs: guide/shards.md
+      - Choosing the width: guide/tuning.md
+      - Saving and loading: guide/persistence.md
+      - Moving from Faiss or cuVS: guide/adapters.md
+      - Sparse attention: guide/attention.md
+  - Concepts: concepts.md
+  - Benchmarks: benchmarks.md
+  - API reference: api.md
+  - C++ API: cpp.md
+  - C API: c.md
+  - Development:
+      - Contributing: development/contributing.md
+      - Releases and compatibility: development/releasing.md

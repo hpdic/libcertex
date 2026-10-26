@@ -1,0 +1,19 @@
+name: Bug report
+description: A wrong result, a crash, or an unexpected slowdown
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: What happened
+      description: For a wrong neighbor, include the query, the returned and the expected ids, and their distances.
+    validations: {required: true}
+  - type: textarea
+    attributes:
+      label: Reproducing script
+      render: python
+    validations: {required: true}
+  - type: input
+    attributes:
+      label: Versions
+      description: certex, torch, libcuvs, the CUDA driver, and the GPU model
+    validations: {required: true}

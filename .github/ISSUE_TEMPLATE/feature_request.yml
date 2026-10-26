@@ -1,0 +1,13 @@
+name: Feature request
+description: A new capability or an interface change
+labels: [enhancement]
+body:
+  - type: textarea
+    attributes:
+      label: Use case
+      description: What workload needs this, and at what scale?
+    validations: {required: true}
+  - type: textarea
+    attributes:
+      label: Proposed interface
+      render: python

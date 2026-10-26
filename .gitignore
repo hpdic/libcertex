@@ -1,0 +1,17 @@
+__pycache__/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+# extension modules built in place (python/CMakeLists.txt)
+certex/*.so
+# archives and data never enter the repository
+*.gz
+*.tgz
+*.zip
+*.tar
+*.npy
+*.npz
+*.fbin
+*.ibin
+*.u8bin
