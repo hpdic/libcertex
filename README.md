@@ -7,8 +7,8 @@
 [![CertEx paper](https://img.shields.io/badge/CertEx%20paper-arXiv%3A2610.21325-b31b1b.svg)](https://arxiv.org/abs/2610.21325)
 
 certex is the open-source implementation of CertEx (Certified Exclusion), exact k-nearest-neighbor search on NVIDIA
-GPUs. It returns the exact k nearest neighbors of every query, at the speed of a half-precision screen: a lower bound evaluated on the tensor cores, with
-its rounding error folded into the same product, proves that almost every stored vector cannot be a neighbor, and
+GPUs. It returns the exact k nearest neighbors of every query, at the speed of a half-precision screen: a lower
+bound evaluated on the tensor cores, with its rounding error folded into the same product, proves that almost every stored vector cannot be a neighbor, and
 only the few survivors are verified with exact double-precision distances.
 
 Every result equals exhaustive search in double precision. No setting trades accuracy for speed: there is no graph
