@@ -2,11 +2,12 @@
 
 [![CI](https://github.com/hpdic/libcertex/actions/workflows/ci.yml/badge.svg)](https://github.com/hpdic/libcertex/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/certex)](https://pypi.org/project/certex/)
 [![Zarc paper](https://img.shields.io/badge/Zarc%20paper-10.5281%2Fzenodo.23674583-6f42c1.svg)](https://doi.org/10.5281/zenodo.23674583)
 [![CertEx paper](https://img.shields.io/badge/CertEx%20paper-arXiv%3A2610.21325-b31b1b.svg)](https://arxiv.org/abs/2610.21325)
 
-Exact k-nearest-neighbor search on NVIDIA GPUs by certified exclusion. certex returns the exact k nearest
-neighbors of every query, at the speed of a half-precision screen: a lower bound evaluated on the tensor cores, with
+certex is the open-source implementation of CertEx (Certified Exclusion), exact k-nearest-neighbor search on NVIDIA
+GPUs. It returns the exact k nearest neighbors of every query, at the speed of a half-precision screen: a lower bound evaluated on the tensor cores, with
 its rounding error folded into the same product, proves that almost every stored vector cannot be a neighbor, and
 only the few survivors are verified with exact double-precision distances.
 
