@@ -18,5 +18,5 @@ over the label of each query for filtered search).
 | BIGANN-10M, filtered at 0.1% | 123 | 16 | device | | 402,700 | 100% |
 
 One NVIDIA H100 NVL (94 GB), batches of 2,048 queries, k = 10, 10,000 queries; these are the measurements of the
-[Zarc paper](https://doi.org/10.5281/zenodo.23674583). Filtered search uses the label partition (the default); with the label filter over every row
+[Zarc paper](https://arxiv.org/abs/2611.29252). Filtered search uses the label partition (the default); with the label filter over every row
 (`partition_labels=False`), it runs at 116,900, 61,500, and 50,500 queries per second.

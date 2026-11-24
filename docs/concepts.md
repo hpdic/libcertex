@@ -30,4 +30,4 @@ The few vectors that survive are verified with exact double-precision
 distances, in increasing order of their certified lower bounds, until no remaining survivor can enter the top k.
 
 The proofs are given in the CertEx paper ([arXiv:2610.21325](https://arxiv.org/abs/2610.21325)) for certified screening and in the Zarc paper
-([doi:10.5281/zenodo.23674583](https://doi.org/10.5281/zenodo.23674583)) for the rest of the pipeline.
+([arXiv:2611.29252](https://arxiv.org/abs/2611.29252)) for the rest of the pipeline.

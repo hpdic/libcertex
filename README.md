@@ -3,7 +3,7 @@
 [![CI](https://github.com/hpdic/libcertex/actions/workflows/ci.yml/badge.svg)](https://github.com/hpdic/libcertex/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/certex)](https://pypi.org/project/certex/)
-[![Zarc paper](https://img.shields.io/badge/Zarc%20paper-10.5281%2Fzenodo.23674583-6f42c1.svg)](https://doi.org/10.5281/zenodo.23674583)
+[![Zarc paper](https://img.shields.io/badge/Zarc%20paper-arXiv%3A2611.29252-b31b1b.svg)](https://arxiv.org/abs/2611.29252)
 [![CertEx paper](https://img.shields.io/badge/CertEx%20paper-arXiv%3A2610.21325-b31b1b.svg)](https://arxiv.org/abs/2610.21325)
 
 certex is the open-source implementation of CertEx (Certified Exclusion), exact k-nearest-neighbor search on NVIDIA
@@ -126,7 +126,7 @@ Build it locally with `pip install -e ".[docs]" && mkdocs serve`.
 
 Runnable examples are in [examples/](examples/): one-call search, exact ground truth for evaluating approximate
 indexes, an exact k-NN graph with near-duplicate removal, filtered search, and every interface of the table above.
-The [Zarc paper](https://doi.org/10.5281/zenodo.23674583) describes the design of the library (search pipeline, kernels, memory tiers, updates, metrics, and
+The [Zarc paper](https://arxiv.org/abs/2611.29252) describes the design of the library (search pipeline, kernels, memory tiers, updates, metrics, and
 filters), proves that each mechanism keeps every answer exact, and reports its evaluation.
 
 ## Benchmarks
@@ -139,7 +139,7 @@ filters), proves that each mechanism keeps every answer exact, and reports its e
 | BIGANN-10M, filtered at 10%, 1%, 0.1% | 123 | device | | 324,400, 392,000, 402,700 | 100% |
 
 One H100 NVL, batches of 2,048 queries, k = 10, anchor stride 16 (32 at 500M). These are the measurements of the
-[Zarc paper](https://doi.org/10.5281/zenodo.23674583); [docs/benchmarks.md](docs/benchmarks.md) lists more configurations.
+[Zarc paper](https://arxiv.org/abs/2611.29252); [docs/benchmarks.md](docs/benchmarks.md) lists more configurations.
 
 certex is a CUDA C++ library laid out as a cuVS module (`cuvs::neighbors::certex`, in [cpp/](cpp/)), with a Python
 binding.
@@ -154,13 +154,11 @@ Contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md) (commits are s
 The library is described in the Zarc paper, and its certified screening comes from the CertEx paper:
 
 ```bibtex
-@misc{zhao2026zarc,
-  author       = {Dongfang Zhao},
-  title        = {{Zarc: Exact Nearest Neighbors over a Billion Vectors in Seconds}},
-  howpublished = {Zenodo preprint},
-  year         = {2026},
-  doi          = {10.5281/zenodo.23674583},
-  url          = {https://doi.org/10.5281/zenodo.23674583}
+@article{zhao2026zarc,
+  author  = {Dongfang Zhao},
+  title   = {{Zarc: Exact Nearest Neighbors over a Billion Vectors in Seconds}},
+  journal = {arXiv preprint arXiv:2611.29252},
+  year    = {2026}
 }
 
 @article{zhao2026certex,

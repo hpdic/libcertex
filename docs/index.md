@@ -19,5 +19,5 @@ D, I = certex.search(xb, xq, k=10)  # the exact 10 nearest neighbors of every qu
 ```
 
 certex is the library of *Zarc: Exact Nearest Neighbors over a Billion Vectors in Seconds*
-([doi:10.5281/zenodo.23674583](https://doi.org/10.5281/zenodo.23674583)), which builds on the certified screening of *CertEx: Exact Visual Retrieval at
+([arXiv:2611.29252](https://arxiv.org/abs/2611.29252)), which builds on the certified screening of *CertEx: Exact Visual Retrieval at
 Scale by Certified Exclusion* ([arXiv:2610.21325](https://arxiv.org/abs/2610.21325)).

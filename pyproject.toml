@@ -37,7 +37,7 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/hpdic/libcertex"
-"Zarc paper" = "https://doi.org/10.5281/zenodo.23674583"
+"Zarc paper" = "https://arxiv.org/abs/2611.29252"
 "CertEx paper" = "https://arxiv.org/abs/2610.21325"
 Changelog = "https://github.com/hpdic/libcertex/blob/main/CHANGELOG.md"
 
